@@ -21,7 +21,7 @@ import (
 	"github.com/tomasen/realip"
 )
 
-//IPFilterOptions for IPFilter. Allowed takes precendence over Blocked.
+//IPFilterOptions for IPFilter. Allowed takes precedence over Blocked.
 //IPs can be IPv4 or IPv6 and can optionally contain subnet
 //masks (/24). Note however, determining if a given IP is
 //included in a subnet requires a linear scan so is less performant
