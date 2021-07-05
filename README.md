@@ -1,50 +1,59 @@
-# transfer.sh [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dutchcoders/transfer.sh?utm_source=badge&utm_medium=badge&utm_campaign=&utm_campaign=pr-badge&utm_content=badge) [![Go Report Card](https://goreportcard.com/badge/github.com/dutchcoders/transfer.sh)](https://goreportcard.com/report/github.com/dutchcoders/transfer.sh) [![Docker pulls](https://img.shields.io/docker/pulls/dutchcoders/transfer.sh.svg)](https://hub.docker.com/r/dutchcoders/transfer.sh/) [![Build Status](https://github.com/dutchcoders/transfer.sh/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/dutchcoders/transfer.sh/actions/workflows/test.yml?query=branch%3Amaster)
+# transfer.sh [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Marck/transfer.sh?utm_source=badge&utm_medium=badge&utm_campaign=&utm_campaign=pr-badge&utm_content=badge) [![Go Report Card](https://goreportcard.com/badge/github.com/Marck/transfer.sh)](https://goreportcard.com/report/github.com/Marck/transfer.sh) [![Docker pulls](https://img.shields.io/docker/pulls/dutchcoders/transfer.sh.svg)](https://hub.docker.com/r/dutchcoders/transfer.sh/) [![Build Status](https://github.com/Marck/transfer.sh/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/Marck/transfer.sh/actions/workflows/test.yml?query=branch%3Amaster)
 
 Easy and fast file sharing from the command-line. This code contains the server with everything you need to create your own instance.
 
 Transfer.sh currently supports the s3 (Amazon S3), gdrive (Google Drive), storj (Storj) providers, and local file system (local).
 
+This repository is cleaned up and forked from the [Marck transfer.sh](https://github.com/dutchcoders/transfer.sh/) repository.
+
 ## Disclaimer
 
-The service at https://transfersh.com is of unknown origin and reported as cloud malware.
+The service at `https://transfersh.com` is of unknown origin and reported as cloud malware.
 
 ## Usage
 
-### Upload:
+### Upload
+
 ```bash
-$ curl --upload-file ./hello.txt https://transfer.sh/hello.txt
+curl --upload-file ./hello.txt https://transfer.sh/hello.txt
 ```
 
-### Encrypt & upload:
+### Encrypt & upload
+
 ```bash
-$ cat /tmp/hello.txt|gpg -ac -o-|curl -X PUT --upload-file "-" https://transfer.sh/test.txt
+cat /tmp/hello.txt|gpg -ac -o-|curl -X PUT --upload-file "-" https://transfer.sh/test.txt
 ````
 
-### Download & decrypt:
+### Download & decrypt
+
 ```bash
-$ curl https://transfer.sh/1lDau/test.txt|gpg -o- > /tmp/hello.txt
+curl https://transfer.sh/1lDau/test.txt|gpg -o- > /tmp/hello.txt
 ```
 
-### Upload to virustotal:
+### Upload to virustotal
+
 ```bash
-$ curl -X PUT --upload-file nhgbhhj https://transfer.sh/test.txt/virustotal
+curl -X PUT --upload-file nhgbhhj https://transfer.sh/test.txt/virustotal
 ```
 
 ### Deleting
+
 ```bash
-$ curl -X DELETE <X-Url-Delete Response Header URL>
+curl -X DELETE <X-Url-Delete Response Header URL>
 ```
 
 ## Request Headers
 
 ### Max-Downloads
+
 ```bash
-$ curl --upload-file ./hello.txt https://transfer.sh/hello.txt -H "Max-Downloads: 1" # Limit the number of downloads
+curl --upload-file ./hello.txt https://transfer.sh/hello.txt -H "Max-Downloads: 1" # Limit the number of downloads
 ```
 
 ### Max-Days
+
 ```bash
-$ curl --upload-file ./hello.txt https://transfer.sh/hello.txt -H "Max-Days: 1" # Set the number of days before deletion
+curl --upload-file ./hello.txt https://transfer.sh/hello.txt -H "Max-Days: 1" # Set the number of days before deletion
 ```
 
 ## Response Headers
@@ -52,6 +61,7 @@ $ curl --upload-file ./hello.txt https://transfer.sh/hello.txt -H "Max-Days: 1" 
 ### X-Url-Delete
 
 The URL used to request the deletion of a file. Returned as a response header.
+
 ```bash
 curl -sD - --upload-file ./hello https://transfer.sh/hello.txt | grep 'X-Url-Delete'
 X-Url-Delete: https://transfer.sh/hello.txt/BAYh0/hello.txt/PDw0NHPcqU
@@ -65,13 +75,13 @@ See good usage examples on [examples.md](examples.md)
 
 Create direct download link:
 
-https://transfer.sh/1lDau/test.txt --> https://transfer.sh/get/1lDau/test.txt
+`https://transfer.sh/1lDau/test.txt` --> `https://transfer.sh/get/1lDau/test.txt`
 
 Inline file:
 
-https://transfer.sh/1lDau/test.txt --> https://transfer.sh/inline/1lDau/test.txt
+`https://transfer.sh/1lDau/test.txt` --> `https://transfer.sh/inline/1lDau/test.txt`
 
-## Usage
+## Link usage
 
 Parameter | Description | Value | Env
 --- | --- | --- | ---
@@ -131,9 +141,22 @@ go run main.go --provider=local --listener :8080 --temp-path=/tmp/ --basedir=/tm
 ## Build
 
 ```bash
-$ git clone git@github.com:dutchcoders/transfer.sh.git
-$ cd transfer.sh
-$ go build -o transfersh main.go
+git clone git@github.com:Marck/transfer.sh.git
+cd transfer.sh
+go build -o transfersh main.go
+```
+
+> If you have a own *transfer.sh-web* repo then:
+
+1. Change the URLS in all files (except the following files)
+2. Remove the links to my repo in the *go.mod* and *go.sum* files. 
+3. Add your own repo using:
+
+```bash
+go get github.com/YOURUSER/transfer.sh-web
+go mod download github.com/YOURUSER/transfer.sh-web
+go get github.com/YOURUSER/transfer.sh/cmd
+go build -o transfersh main.go
 ```
 
 ## Docker
@@ -147,6 +170,7 @@ docker run --publish 8080:8080 dutchcoders/transfer.sh:latest --provider local -
 ## S3 Usage
 
 For the usage with a AWS S3 Bucket, you just need to specify the following options:
+
 - provider
 - aws-access-key
 - aws-secret-key
@@ -162,6 +186,7 @@ To use a custom non-AWS S3 provider, you need to specify the endpoint as defined
 ## Storj Network Provider
 
 To use the Storj Network as storage provider you need to specify the following flags:
+
 - provider `--provider storj`
 - storj-access _(either via flag or environment variable STORJ_ACCESS)_
 - storj-bucket _(either via flag or environment variable STORJ_BUCKET)_
@@ -180,7 +205,8 @@ Afterwards you can copy the access grant and then start the startup of the trans
 For enhanced security its recommended to provide both the access grant and the bucket name as ENV Variables.
 
 Example:
-```
+
+```bash
 export STORJ_BUCKET=<BUCKET NAME>
 export STORJ_ACCESS=<ACCESS GRANT>
 transfer.sh --provider storj
@@ -189,6 +215,7 @@ transfer.sh --provider storj
 ## Google Drive Usage
 
 For the usage with Google drive, you need to specify the following options:
+
 - provider
 - gdrive-client-json-filepath
 - gdrive-local-config-path
@@ -201,25 +228,17 @@ download the file and place into a safe directory
 
 ### Usage example
 
-```go run main.go --provider gdrive --basedir /tmp/ --gdrive-client-json-filepath /[credential_dir] --gdrive-local-config-path [directory_to_save_config] ```
+```bash
+go run main.go --provider gdrive --basedir /tmp/ --gdrive-client-json-filepath /[credential_dir] --gdrive-local-config-path [directory_to_save_config]
+```
 
 ## Contributions
 
 Contributions are welcome.
 
-## Creators
+## Donate
 
-**Remco Verhoef**
-- <https://twitter.com/remco_verhoef>
-- <https://twitter.com/dutchcoders>
-
-**Uvis Grinfelds**
-
-## Maintainer
-
-**Andrea Spacca**
-
-**Stefan Benten**
+Original repo from [Dutchcoders](https://github.com/dutchcoders/transfer.sh). If you want to donate to Dutchcoders, you can do so via Bitcoin: 164ybRMLbg1dhhWWiUkXtiNr7jUhMKdJqH
 
 ## Copyright and license
 

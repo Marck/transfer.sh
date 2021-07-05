@@ -1,9 +1,10 @@
-module github.com/dutchcoders/transfer.sh
+module github.com/Marck/transfer.sh
 
 go 1.13
 
 require (
 	cloud.google.com/go v0.77.0 // indirect
+	github.com/Marck/transfer.sh-web v0.0.0-20210705092217-0600399c877f // indirect
 	github.com/PuerkitoBio/ghost v0.0.0-20160324114900-206e6e460e14
 	github.com/VojtechVitek/ratelimit v0.0.0-20160722140851-dc172bc0f6d2
 	github.com/aws/aws-sdk-go v1.37.14
@@ -11,7 +12,6 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/dutchcoders/go-clamd v0.0.0-20170520113014-b970184f4d9e
 	github.com/dutchcoders/go-virustotal v0.0.0-20140923143438-24cc8e6fa329
-	github.com/dutchcoders/transfer.sh-web v0.0.0-20210212072623-ac7014a9c3a7
 	github.com/elazarl/go-bindata-assetfs v1.0.1
 	github.com/fatih/color v1.10.0
 	github.com/garyburd/redigo v1.6.2 // indirect

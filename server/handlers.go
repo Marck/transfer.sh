@@ -56,7 +56,7 @@ import (
 	"net"
 
 	"encoding/base64"
-	web "github.com/dutchcoders/transfer.sh-web"
+	web "github.com/Marck/transfer.sh-web"
 	"github.com/gorilla/mux"
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/skip2/go-qrcode"

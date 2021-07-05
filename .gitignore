@@ -3,6 +3,7 @@ pkg/
 dist/
 src/
 bin/
+data/*
 *.pyc
 *.egg-info/
 .idea/
