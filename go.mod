@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	cloud.google.com/go v0.77.0 // indirect
-	github.com/Marck/transfer.sh-web v0.0.0-20210705092217-0600399c877f // indirect
+	github.com/Marck/transfer.sh-web v0.0.0-20210705092217-0600399c877f
 	github.com/PuerkitoBio/ghost v0.0.0-20160324114900-206e6e460e14
 	github.com/VojtechVitek/ratelimit v0.0.0-20160722140851-dc172bc0f6d2
 	github.com/aws/aws-sdk-go v1.37.14
