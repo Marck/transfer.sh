@@ -3,16 +3,16 @@ version: "3"
 
 services:
   transfer:
-    image: marck/transfer.sh:latest
+    build: .
     container_name: transfer
     environment:
-      - provider=local
-      - basedir=/data
-      - log=/data/log.log
-      - purge-days=14
-      - purge-interval=24
+      - PROVIDER=local
+      - BASEDIR=/data
+      - LOG=/data/log.log
+      - PURGE_DAYS=14
+      - PURGE_INTERVAL=24
     volumes:
-      - ./data:/data # Create the data folder or change to a folder or your choosing
+      - ./data:/data # Choose a folder and make sure it exists.
     ports:
       - 8080:8080
     restart: unless-stopped

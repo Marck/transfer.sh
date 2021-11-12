@@ -161,10 +161,24 @@ go build -o transfersh main.go
 
 ## Docker
 
-For easy deployment, we've created a Docker container.
+For deploying using compose:
+
+```bash
+docker compose up -d
+docker logs -f transfer
+```
+
+Or using Docker run:
 
 ```bash
 docker run --publish 8080:8080 dutchcoders/transfer.sh:latest --provider local --basedir /tmp/
+```
+
+If you want to build your own, run:
+
+```bash
+docker build . -t YOURNAME/transfer.sh:latest
+docker run --publish 8080:8080 YOURNAME/transfer.sh:latest --provider local --basedir /tmp/
 ```
 
 ## S3 Usage
